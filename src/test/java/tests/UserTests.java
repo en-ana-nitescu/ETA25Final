@@ -8,16 +8,7 @@ import org.testng.annotations.Test;
 import utils.LoggerUtils;
 import utils.PropertyUtils;
 
-public class UserTests {
-
-    HealthCheckActions healthCheckActions;
-    UserActions userActions;
-    public PropertyUtils propertyUtils;
-    UserRequest userRequest;
-    UserResponse userResponse;
-    public String userId;
-    public String email;
-    public String token;
+public class UserTests extends Hooks {
 
     @Test
     public void testMethod() {
@@ -46,42 +37,4 @@ public class UserTests {
         }
     }
 
-    public int healthCheck() {
-        healthCheckActions = new HealthCheckActions();
-        return healthCheckActions.healthCheck();
-    }
-
-    public void createUser() {
-        userActions = new UserActions();
-        propertyUtils = new PropertyUtils("userData");
-        userRequest = new UserRequest(propertyUtils.getAllData());
-
-        userResponse = userActions.createUser(userRequest);
-        userId = userResponse.getData().getId();
-        email = userResponse.getData().getEmail();
-    }
-
-    public void login() {
-        userRequest.setEmail(email);
-        userResponse = userActions.login(userRequest);
-        token = userResponse.getData().getToken();
-    }
-
-    public void getUserDetails() {
-        userResponse = userActions.getUserDetails(token);
-    }
-
-    public void updateUserDetails() {
-        userResponse = userActions.updateUserDetails(userRequest, token);
-    }
-
-    public void forgotPassword() {
-        userResponse = userActions.forgotPassword(userRequest, token);
-    }
-
-    public void userLogout() {
-        userResponse = userActions.userLogout(token);
-    }
-
-    //TODO: deleteUser method can be added later
 }
