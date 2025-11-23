@@ -1,9 +1,9 @@
 package tests;
 
 import actions.HealthCheckActions;
+import actions.NoteActions;
 import actions.UserActions;
-import model.UserRequest;
-import model.UserResponse;
+import model.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -24,6 +24,9 @@ public class Hooks {
     public String userId;
     public String email;
     public String token;
+    NoteActions noteActions;
+    NoteRequest noteRequest;
+    public String noteId;
 
 
     @BeforeSuite
@@ -86,6 +89,39 @@ public class Hooks {
         userResponse = userActions.userLogout(token);
     }
 
-    //TODO: deleteUser method can be added later
+    public void deleteAccount(){
+        userResponse = userActions.deleteAccount(token);
+    }
+
+    public void createNote(NoteCategory category) {
+        noteActions = new NoteActions();
+
+        switch (category) {
+            case WORK -> propertyUtils = new PropertyUtils("workNoteData");
+            case PERSONAL -> propertyUtils = new PropertyUtils("personalNoteData");
+            case HOME -> propertyUtils = new PropertyUtils("homeNoteData");
+        }
+        noteRequest = new NoteRequest(propertyUtils.getAllData());
+
+        NoteResponse<NoteData> noteResponse = noteActions.createNote(noteRequest, token);
+        noteId = noteResponse.getData().getId();
+    }
+
+    public void getAllNotes() {
+        noteActions.getAllNotes(token);
+    }
+
+    public void getNoteById() {
+        noteActions.getNoteById(noteId, token);
+    }
+
+    public void updateNote() {
+        noteRequest.setCompleted(true);
+        noteActions.updateNote(noteId, noteRequest, token);
+    }
+
+    public void deleteNoteById() {
+        noteActions.deleteNote(noteId, token);
+    }
 
 }

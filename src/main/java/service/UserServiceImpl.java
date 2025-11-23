@@ -2,6 +2,7 @@ package service;
 
 import io.restassured.response.Response;
 import model.UserRequest;
+import service.endpoints.UserEndpoints;
 
 public class UserServiceImpl implements UserServiceInterface {
 
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
     @Override
     public Response deleteAccount(String token) {
-        return null;
+        return service.delete(token, UserEndpoints.DELETE_ACCOUNT);
     }
 
 }

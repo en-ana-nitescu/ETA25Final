@@ -1,12 +1,7 @@
 package tests;
 
-import actions.HealthCheckActions;
-import actions.UserActions;
-import model.UserRequest;
-import model.UserResponse;
 import org.testng.annotations.Test;
 import utils.LoggerUtils;
-import utils.PropertyUtils;
 
 public class UserTests extends Hooks {
 
@@ -32,6 +27,13 @@ public class UserTests extends Hooks {
 
             LoggerUtils.infoTest("Step6: logout user");
             userLogout();
+
+            LoggerUtils.infoTest("Step7: login again with created user");
+            login();
+
+            LoggerUtils.infoTest("Step8: delete user account");
+            deleteAccount();
+
         } else {
             LoggerUtils.infoTest("Health check failed. Skipping further steps.");
         }

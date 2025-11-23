@@ -1,4 +1,4 @@
-package service;
+package service.endpoints;
 
 public class UserEndpoints {
 

@@ -1,6 +1,7 @@
 package service;
 
 import io.restassured.response.Response;
+import service.endpoints.HealthCheckEndpoints;
 
 public class HealthCheckServiceImpl {
 

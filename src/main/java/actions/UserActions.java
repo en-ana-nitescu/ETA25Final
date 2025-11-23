@@ -97,7 +97,7 @@ public class UserActions {
 
         UserResponse userResponse = response.body().as(UserResponse.class);
         assertEquals(userResponse.getSuccess(), true);
-        assertEquals(userResponse.getMessage(), "Successful Request");
+        assertEquals(userResponse.getMessage(), "Account successfully deleted");
 
         return userResponse;
     }
