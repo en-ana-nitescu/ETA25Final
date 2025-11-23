@@ -3,8 +3,6 @@ package model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class NoteResponse<T> {
 
@@ -18,5 +16,6 @@ public class NoteResponse<T> {
     private String message;
 
     @JsonProperty("data")
-    private T data;;
+    private T data;
+    ;
 }

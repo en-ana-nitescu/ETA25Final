@@ -12,11 +12,11 @@ public class ExtentUtils {
 
     private static ExtentReports extent;
     private static ExtentTest testReport;
-    private static final String pathToProject =  System.getProperty("user.dir") + "/target/extentReports/";
+    private static final String pathToProject = System.getProperty("user.dir") + "/target/extentReports/";
 
     private static void createDirectory() {
         File directory = new File(pathToProject);
-        if(!directory.isDirectory()) {
+        if (!directory.isDirectory()) {
             directory.mkdirs();
         }
     }
@@ -30,13 +30,13 @@ public class ExtentUtils {
     }
 
     public static void attachReportLog(String attachType, String message) {
-        if(attachType.equals(ReportStep.INFO_STEP)) {
+        if (attachType.equals(ReportStep.INFO_STEP)) {
             testReport.log(Status.INFO, message);
         }
-        if(attachType.equals(ReportStep.PASS_STEP)) {
+        if (attachType.equals(ReportStep.PASS_STEP)) {
             testReport.log(Status.PASS, message);
         }
-        if(attachType.equals(ReportStep.FAIL_STEP)) {
+        if (attachType.equals(ReportStep.FAIL_STEP)) {
             testReport.log(Status.FAIL, message);
         }
     }
@@ -50,7 +50,7 @@ public class ExtentUtils {
         attachReportLog(ReportStep.INFO_STEP, "----End test---- " + testName);
     }
 
-    public static void generateReport(){
+    public static void generateReport() {
         extent.flush();
     }
 

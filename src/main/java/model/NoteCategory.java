@@ -1,5 +1,8 @@
 package model;
 
+import lombok.Getter;
+
+@Getter
 public enum NoteCategory {
 
     WORK("Work"),
@@ -14,7 +17,4 @@ public enum NoteCategory {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

@@ -89,7 +89,7 @@ public class Hooks {
         userResponse = userActions.userLogout(token);
     }
 
-    public void deleteAccount(){
+    public void deleteAccount() {
         userResponse = userActions.deleteAccount(token);
     }
 

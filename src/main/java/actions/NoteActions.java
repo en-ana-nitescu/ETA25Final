@@ -9,6 +9,7 @@ import model.NoteResponse;
 import service.NoteServiceImpl;
 import utils.ResponseStatus;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -17,6 +18,7 @@ public class NoteActions {
 
     Response response;
     NoteServiceImpl noteService;
+    private final Gson gson = new Gson();
 
     public NoteActions() {
         noteService = new NoteServiceImpl();
@@ -26,12 +28,8 @@ public class NoteActions {
         response = noteService.createNote(body, token);
         assertEquals(response.getStatusCode(), ResponseStatus.SC_OK);
 
-        //NoteResponse<NoteData> noteResponse = response.body().as(NoteResponse.class);
-        String json = response.getBody().asString();
-        NoteResponse<NoteData> noteResponse = new Gson().fromJson(
-                json, new TypeToken<NoteResponse<NoteData>>() {
-                }.getType()
-        );
+        NoteResponse<NoteData> noteResponse = parseResponse(response, new TypeToken<NoteResponse<NoteData>>() {
+        }.getType());
         assertEquals(noteResponse.getSuccess(), true);
         assertEquals(noteResponse.getMessage(), "Note successfully created");
         return noteResponse;
@@ -41,11 +39,8 @@ public class NoteActions {
         response = noteService.getAllNotes(token);
         assertEquals(response.getStatusCode(), ResponseStatus.SC_OK);
 
-        String json = response.getBody().asString();
-        NoteResponse<List<NoteData>> notesResponse = new Gson().fromJson(
-                json, new TypeToken<NoteResponse<List<NoteData>>>() {
-                }.getType()
-        );
+        NoteResponse<List<NoteData>> notesResponse = parseResponse(response, new TypeToken<NoteResponse<List<NoteData>>>() {
+        }.getType());
         assertEquals(notesResponse.getSuccess(), true);
         assertEquals(notesResponse.getMessage(), "Notes successfully retrieved");
         return notesResponse;
@@ -55,11 +50,8 @@ public class NoteActions {
         response = noteService.getNoteById(noteId, token);
         assertEquals(response.getStatusCode(), ResponseStatus.SC_OK);
 
-        String json = response.getBody().asString();
-        NoteResponse<NoteData> noteResponse = new Gson().fromJson(
-                json, new TypeToken<NoteResponse<NoteData>>() {
-                }.getType()
-        );
+        NoteResponse<NoteData> noteResponse = parseResponse(response, new TypeToken<NoteResponse<NoteData>>() {
+        }.getType());
         assertEquals(noteResponse.getSuccess(), true);
         assertEquals(noteResponse.getMessage(), "Note successfully retrieved");
         assertEquals(noteResponse.getData().getId(), noteId);
@@ -70,11 +62,8 @@ public class NoteActions {
         response = noteService.updateNote(noteId, body, token);
         assertEquals(response.getStatusCode(), ResponseStatus.SC_OK);
 
-        String json = response.getBody().asString();
-        NoteResponse<NoteData> noteResponse = new Gson().fromJson(
-                json, new TypeToken<NoteResponse<NoteData>>() {
-                }.getType()
-        );
+        NoteResponse<NoteData> noteResponse = parseResponse(response, new TypeToken<NoteResponse<NoteData>>() {
+        }.getType());
         assertEquals(noteResponse.getSuccess(), true);
         assertEquals(noteResponse.getMessage(), "Note successfully Updated");
         assertEquals(noteResponse.getData().getId(), noteId);
@@ -86,14 +75,16 @@ public class NoteActions {
         response = noteService.deleteNote(noteId, token);
         assertEquals(response.getStatusCode(), ResponseStatus.SC_OK);
 
-        String json = response.getBody().asString();
-        NoteResponse<NoteData> noteResponse = new Gson().fromJson(
-                json, new TypeToken<NoteResponse<NoteData>>() {
-                }.getType()
-        );
+        NoteResponse<NoteData> noteResponse = parseResponse(response, new TypeToken<NoteResponse<NoteData>>() {
+        }.getType());
         assertEquals(noteResponse.getSuccess(), true);
         assertEquals(noteResponse.getMessage(), "Note successfully deleted");
         return noteResponse;
+    }
+
+    private <T> NoteResponse<T> parseResponse(Response response, Type type) {
+        String json = response.getBody().asString();
+        return gson.fromJson(json, type);
     }
 
 }

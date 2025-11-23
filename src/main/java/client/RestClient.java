@@ -10,14 +10,12 @@ public class RestClient {
 
     PropertyUtils propertyUtils = new PropertyUtils("config");
 
-    //method to configure the client
     private RequestSpecification prepareClient(RequestSpecification requestSpecification) {
         requestSpecification.baseUri(propertyUtils.getAllData().get("baseUri"));
         requestSpecification.contentType(ContentType.JSON);
         return requestSpecification;
     }
 
-    //method that returns a response based on client configuration
     public Response performRequest(String requestType, RequestSpecification requestSpecification, String endpoint) {
         switch (requestType) {
             case RequestType.REQUEST_POST:
