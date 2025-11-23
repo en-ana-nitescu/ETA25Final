@@ -12,7 +12,6 @@ public class UserActions {
 
     private final UserServiceImpl userServiceImpl;
     Response response;
-    //UserResponse userResponse;
 
     public UserActions() {
         userServiceImpl = new UserServiceImpl();

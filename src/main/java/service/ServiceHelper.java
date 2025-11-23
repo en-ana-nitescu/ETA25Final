@@ -5,11 +5,13 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import tools.jackson.databind.ObjectMapper;
 import utils.LoggerUtils;
+import utils.PropertyUtils;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class ServiceHelper {
+
+    static PropertyUtils propertyUtils = new PropertyUtils("config");
 
     public static void requestLogs(RequestSpecification requestSpecification, String path, String methodType) {
         LoggerUtils.infoTest("====Request info====");
@@ -27,7 +29,7 @@ public class ServiceHelper {
     }
 
     private static String getRequestURL(String path) {
-        return "Request URI: https://demoqa.com/" + path;
+        return "Request URI: " + propertyUtils.getAllData().get("baseUri") + path;
     }
 
     private static String getRequestMethod(String methodType) {

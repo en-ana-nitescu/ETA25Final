@@ -12,6 +12,15 @@ public class CommonService {
     Response response;
     private static final String AUTHORIZATION_HEADER_KEY = "x-auth-token";
 
+    public Response get(String endpoint) {
+        requestSpecification = RestAssured.given();
+        ServiceHelper.requestLogs(requestSpecification, endpoint, RequestType.REQUEST_GET);
+
+        response = performRequest(RequestType.REQUEST_GET, requestSpecification, endpoint);
+        ServiceHelper.responseLogs(response);
+        return response;
+    }
+
     public Response post(Object body, String endpoint) {
         requestSpecification = RestAssured.given();
         requestSpecification.body(body);
