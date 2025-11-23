@@ -1,3 +1,5 @@
+package tests;
+
 import actions.UserActions;
 import model.UserRequest;
 import model.UserResponse;
