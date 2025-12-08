@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <BackendConfig>
+        <ServiceURL>https://demoqa.com</ServiceURL>
+    </BackendConfig>
+    <FrontendConfig>
+        <LocalBrowser>chrome</LocalBrowser>
+        <Url>https://practice.expandtesting.com/register</Url>
+        <Headless>false</Headless>
+        <Gpu>--disable-gpu</Gpu>
+        <InfoBars>--disable-infobars</InfoBars>
+        <Sandbox>--no-sandbox</Sandbox>
+        <RemoteURL>http://localhost:4444/wd/hub</RemoteURL>
+        <ImplicitWait>10</ImplicitWait>
+        <ScriptTimeout>15</ScriptTimeout>
+        <PageLoadTimeout>30</PageLoadTimeout>
+    </FrontendConfig>
+    <DatabaseConfig>
+
+    </DatabaseConfig>
+</configuration>

@@ -1,10 +1,16 @@
 package tests;
 
-import model.NoteCategory;
+import model.api.NoteCategory;
 import org.testng.annotations.Test;
+import service.ui.SharedData;
+import steps.Hooks;
 import utils.LoggerUtils;
 
 public class NoteTests extends Hooks {
+
+    public NoteTests(SharedData sharedData) {
+        super(sharedData);
+    }
 
     @Test
     public void testMethod() {

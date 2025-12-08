@@ -1,9 +1,15 @@
 package tests;
 
 import org.testng.annotations.Test;
+import service.ui.SharedData;
+import steps.Hooks;
 import utils.LoggerUtils;
 
 public class UserTests extends Hooks {
+
+    public UserTests(SharedData sharedData) {
+        super(sharedData);
+    }
 
     @Test
     public void testMethod() {
