@@ -1,6 +1,8 @@
 package steps;
 
+import actions.ui.LoginUIActions;
 import actions.ui.RegisterUIActions;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,6 +13,7 @@ public class UserServiceSteps extends BaseSteps {
 
     private Hooks hooks;
     private RegisterUIActions registerUIActions;
+    private LoginUIActions loginUIActions;
 
     public UserServiceSteps(SharedData sharedData) {
         super(sharedData);
@@ -37,5 +40,11 @@ public class UserServiceSteps extends BaseSteps {
     public void registerNewUserFromUi() {
         registerUIActions = new RegisterUIActions(sharedData.getDriver());
         registerUIActions.registerNewUser();
+    }
+
+    @Then("I can login with the new user")
+    public void iCanLoginWithTheNewUser() {
+        loginUIActions = new LoginUIActions(sharedData.getDriver());
+        loginUIActions.logIntoApplication();
     }
 }
