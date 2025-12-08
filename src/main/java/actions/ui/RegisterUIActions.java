@@ -4,7 +4,7 @@ import model.ui.UserAccount;
 import org.openqa.selenium.WebDriver;
 import pages.RegisterPage;
 
-public class RegisterUIActions extends BaseUIActions{
+public class RegisterUIActions extends BaseUIActions {
 
     public RegisterUIActions(WebDriver driver) {
         super(driver);

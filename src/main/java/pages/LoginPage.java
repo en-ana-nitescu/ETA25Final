@@ -1,5 +1,6 @@
 package pages;
 
+import model.ui.UserAccount;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,17 +21,17 @@ public class LoginPage extends BasePage {
     @FindBy(id = "submit-login")
     private WebElement loginElement;
 
-/*    public SecureAreaPage logIntoApplication(RequestAccount requestAccount) {
-        usernameElement.sendKeys(requestAccount.getUserName());
-        LoggerUtils.info("The user fills the username " + requestAccount.getUserName());
+    public SecureAreaPage logIntoApplication(UserAccount userAccount) {
+        usernameElement.sendKeys(userAccount.getUserName());
+        LoggerUtils.info("The user fills the username " + userAccount.getUserName());
 
-        passwordElement.sendKeys(requestAccount.getPassword());
-        LoggerUtils.info("The user fills the password " + requestAccount.getPassword());
+        passwordElement.sendKeys(userAccount.getPassword());
+        LoggerUtils.info("The user fills the password " + userAccount.getPassword());
 
         loginElement.click();
         LoggerUtils.info("The user click on login button");
 
-        return new ProfilePage(driver);
-    }*/
+        return new SecureAreaPage(driver);
+    }
 
 }
